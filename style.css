@@ -16,7 +16,7 @@ body {
 .input-container {
     width: 40%;
     max-width: 600px;
-    height: 10%;
+    padding: 2rem;
     border-radius: 0.7rem;
     background-color: #fff;
     display: flex;
@@ -41,6 +41,7 @@ body {
     height: 38px;
     width: 50%;
     border-radius: 0.7rem;
+    padding-left: 12px
 }
 
 .task-container {
@@ -51,10 +52,30 @@ body {
     flex-direction: column;
     justify-content: center;
     border-radius: 1em;
+    padding: 2rem;
 }
 
 .task {
     display: flex;
-    justify-content: flex-end;
-    height: 3rem;
+    justify-content: space-evenly;
+    align-items: center;
+    min-height: 3rem;
+    border: rgba(160, 160, 160, 0.6) 1px solid;
+    border-radius: 0.7rem;
+    padding: 0.5rem 0;
+    margin-bottom: 2%;
+}
+
+.task-title {
+    width: 70%;
+}
+
+.delete {
+    background-color: rgb(108, 59, 206);
+    color: #FFF;
+    border: 0;
+    border-radius: 0.7rem;
+    height: 40px;
+    width: 40px;
+    font-size: large;
 }
