@@ -1,5 +1,7 @@
-// First let's work on adding a task
-let tasks = []
+// Initialise tasks to what is stored in local storage. If nothing is stored then return an empty array
+
+let tasks = JSON.parse(localStorage.getItem('toDoTasks'));
+if (!tasks) tasks = [];
 
 const taskContainer = document.querySelector('.task-container')
 const inputField = document.querySelector('.to-do-input')
@@ -23,7 +25,6 @@ const handleAddTask = (e) => {
     
     // Clear the input field
     inputField.value = ""
-
 }
 
 // This function renders the tasks to the display
@@ -40,7 +41,11 @@ const taskHTML = tasks.map((task, index) => {
 })
 
 // add the html to the task container
-taskContainer.innerHTML = taskHTML.join('')
+taskContainer.innerHTML = taskHTML.join('<br>')
+
+// save the tasks array to local storage
+localStorage.setItem('toDoTasks', JSON.stringify(tasks))
+
 
 }
 
@@ -53,10 +58,22 @@ const handleDeleteTask = (e) => {
     }
 }
 
+const handleDoneTask = (e) => {
+    if(e.target.classList.contains('task')){
+        e.target.classList.contains('done') ? e.target.classList.remove('done') : e.target.classList.add('done')
+    } else if (e.target.classList.contains('task-title')) {
+        const parentElement = e.target.parentNode
+        parentElement.classList.contains('done') ? parentElement.classList.remove('done') : parentElement.classList.add('done')
+    }
+}
+
+renderTasks(tasks)
+
 // grab the dom elements required - the input field and the submit button
 const form = document.querySelector('#new-task-form')
 form.addEventListener('submit', (e) => handleAddTask(e))
 
 // Add an event listener to whole container and use delegation to capture the correct element
 taskContainer.addEventListener("click", handleDeleteTask)
+taskContainer.addEventListener("click", handleDoneTask)
 
